@@ -44,7 +44,7 @@ After a minimal Arch install (with grub and systemd), clone and execute -
 
 ```shell
 pacman -Sy git
-git clone --depth 1 https://github.com/prasanthrangan/hyprdots ~/Hyprdots
+git clone --depth 1 https://github.com/theawesomeyopro1/hyprdots ~/Hyprdots
 cd ~/Hyprdots/Scripts
 ./install.sh
 ```
@@ -56,7 +56,7 @@ cd ~/Hyprdots/Scripts
 >```
 
 Please reboot after the install script completes and takes you to sddm login screen (or black screen) for the first time.
-For more details, please refer [installation wiki](https://github.com/prasanthrangan/hyprdots/wiki/Installation)
+For more details, please refer [installation wiki](https://github.com/theawesomeyopro1/hyprdots/wiki/Installation)
 
 ### Updating
 To update Hyprdots you will need to pull the latest changes from github and restore the configs by doing -
@@ -79,7 +79,7 @@ git pull
 
 ## Themes
 
-To create your own custom theme, please refer [theming wiki](https://github.com/prasanthrangan/hyprdots/wiki/Theming)
+To create your own custom theme, please refer [theming wiki](https://github.com/theawesomeyopro1/hyprdots/wiki/Theming)
 
 > [!TIP]
 > You can install/browse/create/maintain/share additional themes (ex. [Synth-Wave](https://github.com/prasanthrangan/hyprdots-mod)) using themepatcher.
