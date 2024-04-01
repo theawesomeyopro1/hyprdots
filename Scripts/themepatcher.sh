@@ -1,8 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #|---/ /+------------------------------+---/ /|#
 #|--/ /-| Script to patch custom theme |--/ /-|#
 #|-/ /--| kRHYME7                      |-/ /--|#
 #|/ /---+------------------------------+/ /---|#
+
+scrDir=$(dirname "$(realpath "$0")")
+source "${scrDir}/global_fn.sh"
+if [ $? -ne 0 ] ; then
+    echo "Error: unable to source global_fn.sh..."
+    exit 1
+fi
+
+set +e
 
 
 # error function
@@ -15,41 +24,53 @@ $0 "Theme-Name" "https://github.com/User/Repository/tree/branch"
 HELP
 }
 
-if [[ -z $1 || -z $2 ]]; then ask_help ; exit 1 ; fi
+if [[ -z $1 || -z $2 ]] ; then ask_help ; exit 1 ; fi
 
 
 # set parameters
 Fav_Theme="$1"
-ThemeCtl="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/theme.ctl"
 
 if [ -d "$2" ]; then
     Theme_Dir="$2"
 
 else Git_Repo=${2%/}
-    if echo "$Git_Repo" | grep -q "/tree/"; then
-        branch=${Git_Repo#*tree/} Git_Repo=${Git_Repo%/tree/*}
-    else branches=$(curl -s "https://api.github.com/repos/${Git_Repo#*://*/}/branches" | jq -r '.[].name') ; branches=($branches)
-        if [[ ${#branches[@]} -le 1 ]]; then
+    if echo "$Git_Repo" | grep -q "/tree/" ; then
+        branch=${Git_Repo#*tree/}
+        Git_Repo=${Git_Repo%/tree/*}
+    else
+        branches=$(curl -s "https://api.github.com/repos/${Git_Repo#*://*/}/branches" | jq -r '.[].name')
+        branches=($branches)
+        if [[ ${#branches[@]} -le 1 ]] ; then
             branch=${branches[0]}
-        else echo "Select a Branch"
-            select branch in "${branches[@]}"; do [[ -n $branch ]] && break || echo "Invalid selection. Please try again." ; done
+        else
+            echo "Select a Branch"
+            select branch in "${branches[@]}" ; do
+                [[ -n $branch ]] && break || echo "Invalid selection. Please try again."
+            done
         fi
     fi
 
-    Git_Path=${Git_Repo#*://*/} Git_Owner=${Git_Path%/*} branch_dir=${branch//\//_}
-    Theme_Dir="$HOME/Clone/HyprdotsPatch-$branch_dir"
+    Git_Path=${Git_Repo#*://*/}
+    Git_Owner=${Git_Path%/*}
+    branch_dir=${branch//\//_}
+    Theme_Dir="${cacheDir}/themepatcher/$branch_dir"
 
-    if [ -d "$Theme_Dir" ]; then
+    if [ -d "$Theme_Dir" ] ; then
         echo "Directory $Theme_Dir already exists. Using existing directory."
-        if cd "$Theme_Dir"; then
-            git stash 2> /dev/null ; git pull ; git stash pop 2> /dev/null ; cd -
+        if cd "$Theme_Dir" ; then
+            git stash &> /dev/null
+            git pull &> /dev/null
+            git stash pop 2> /dev/null ; cd - &> /dev/null
         else
             echo -e "\033[0;31mCould not navigate to $Theme_Dir. Skipping git pull.\033[0m"
         fi
     else
         echo "Directory $Theme_Dir does not exist. Cloning repository into new directory."
         git clone -b "$branch" --depth 1 "$Git_Repo" "$Theme_Dir"
-        if [ $? -ne 0 ]; then echo "Git clone failed" ; exit 1 ; fi
+        if [ $? -ne 0 ] ; then
+            echo "Git clone failed"
+            exit 1
+        fi
     fi
 fi
 
@@ -63,6 +84,7 @@ config=( #!Hard Coded here to atleast Strictly meet requirements.
   ".config/Kvantum/$Fav_Theme/$Fav_Theme.kvconfig"
   ".config/Kvantum/$Fav_Theme/$Fav_Theme.svg"
   ".config/qt5ct/colors/$Fav_Theme.conf"
+  ".config/qt6ct/colors/$Fav_Theme.conf"
   ".config/rofi/themes/$Fav_Theme.rasi"
   ".config/swww/$Fav_Theme/"
   ".config/waybar/themes/$Fav_Theme.css"
@@ -70,8 +92,8 @@ config=( #!Hard Coded here to atleast Strictly meet requirements.
 
 
 # Loop through the config and check if these exist
-for fchk in "${config[@]}"; do
-    if [[ -e "${Theme_Dir}/Configs/${fchk}" ]]; then
+for fchk in "${config[@]}" ; do
+    if [[ -e "${Theme_Dir}/Configs/${fchk}" ]] ; then
         echo -e "\033[0;32m[OK]\033[0m ${fchk}"
     else
         echo -e "\033[0;31m[ERROR]\033[0m ${fchk} --> does not exist in ${Theme_Dir}/Configs/"
@@ -102,11 +124,11 @@ GtkFlag=0
 
 
 # Loop over the themes and extensions
-for pre in "${prefix[@]}"; do
-    for ext in "${postfx[@]}"; do
+for pre in "${prefix[@]}" ; do
+    for ext in "${postfx[@]}" ; do
         if [ -f "${Theme_Dir}/Source/arcs/${pre}_${Fav_Theme}.${ext}" ] ; then
             echo -e "\033[0;32m[Extacting]\033[0m ${Theme_Dir}/Source/arcs/${pre}_${Fav_Theme}.${ext} --> ${TrgtDir[$pre]}"
-            tar -xf "${Theme_Dir}/Source/arcs/${pre}_${Fav_Theme}.${ext}" -C "${TrgtDir[$pre]}" 
+            tar -xf "${Theme_Dir}/Source/arcs/${pre}_${Fav_Theme}.${ext}" -C "${TrgtDir[$pre]}"
             if [ ${pre} == "Gtk" ] ; then
                 GtkFlag=1
             fi
@@ -123,24 +145,27 @@ fc-cache -f
 
 
 # generate restore_cfg control
-cat << THEME > "${Fav_Theme}restore_cfg.lst"
+cat << THEME > "${Theme_Dir}/restore_cfg.lst"
 Y|Y|${HOME}/.config/hypr/themes|${Fav_Theme}.conf|hyprland
 Y|Y|${HOME}/.config/kitty/themes|${Fav_Theme}.conf|kitty
 Y|Y|${HOME}/.config/Kvantum|${Fav_Theme}|kvantum
 Y|Y|${HOME}/.config/qt5ct/colors|${Fav_Theme}.conf|qt5ct
+Y|Y|${HOME}/.config/qt6ct/colors|${Fav_Theme}.conf|qt6ct
 Y|Y|${HOME}/.config/rofi/themes|${Fav_Theme}.rasi|rofi
 Y|N|${HOME}/.config/swww|${Fav_Theme}|swww
 Y|Y|${HOME}/.config/waybar/themes|${Fav_Theme}.css|waybar
 THEME
 
-if ! grep -q "|${Fav_Theme}|" "${ThemeCtl}" ; then 
+if grep -q "^.|${Fav_Theme}|" "${ThemeCtl}" ; then
+    awk -F '|' -v thm="${Fav_Theme}" -v cde="$3" '{OFS=FS} $2 == thm {$3 = cde} {print}' "${ThemeCtl}" > tmp && mv tmp "${ThemeCtl}"
+else
     echo "0|${Fav_Theme}|${3}|~/.config/swww/${Fav_Theme}/${WallSet}" >> "${ThemeCtl}"
 fi
 
 
 # restore configs with theme override
-echo -e "\033[0;32m[Restoring]\033[0m restore_cfg.sh \"${Fav_Theme}\" \"${Theme_Dir}/Configs\"\n"
-./restore_cfg.sh "$Fav_Theme" "$Theme_Dir/Configs"
+echo -e "\033[0;32m[Restoring]\033[0m \"${Theme_Dir}/restore_cfg.lst\" \"${Theme_Dir}/Configs\" \"${Fav_Theme}\"\n"
+"${scrDir}/restore_cfg.sh" "${Theme_Dir}/restore_cfg.lst" "${Theme_Dir}/Configs" "${Fav_Theme}"
 
-rm "${Fav_Theme}restore_cfg.lst"
+exit 0
 

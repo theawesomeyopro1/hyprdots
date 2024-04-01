@@ -4,7 +4,6 @@
 &ensp;[<kbd> <br> Install <br> </kbd>](#Installation)&ensp;
 &ensp;[<kbd> <br> Themes <br> </kbd>](#Themes)&ensp;
 &ensp;[<kbd> <br> Styles <br> </kbd>](#Styles)&ensp;
-&ensp;[<kbd> <br> Packages <br> </kbd>](#Packages)&ensp;
 &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
 &ensp;[<kbd> <br> Youtube <br> </kbd>](#Youtube)&ensp;
 &ensp;[<kbd> <br> Wiki <br> </kbd>](https://github.com/prasanthrangan/hyprdots/wiki)&ensp;
@@ -83,7 +82,7 @@ To create your own custom theme, please refer [theming wiki](https://github.com/
 
 > [!TIP]
 > You can install/browse/create/maintain/share additional themes (ex. [Synth-Wave](https://github.com/prasanthrangan/hyprdots-mod)) using themepatcher.
-> For more details please refer [themepatcher wiki](https://github.com/prasanthrangan/hyprdots/wiki/Themepatcher).
+> For more details please refer [themepatcher wiki](https://github.com/prasanthrangan/hyprdots/wiki/Theming#theme-patcher).
 
 <br><div align="center"><table><tr><td><img width="60" src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/hyprdots_logo.png"></td><td>
 
@@ -173,6 +172,7 @@ To create your own custom theme, please refer [theming wiki](https://github.com/
 | ![rofi style#6](https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/rofi_style_6.png) |
 | ![rofi style#7](https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/rofi_style_7.png) |
 | ![rofi style#8](https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/rofi_style_8.png) |
+| ![rofi style#9](https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/rofi_style_9.png) |
 
 | Wlogout Menu |
 | :-: |
@@ -193,108 +193,6 @@ To create your own custom theme, please refer [theming wiki](https://github.com/
 [<kbd> <br> 🡅 <br> </kbd>](#-design-by-t2)
 </div>
 
-## Packages
-
-<table><tr><td>
-<code>n</code><br><code>v</code><br><code>i</code><br><code>d</code><br><code>i</code><br><code>a</code></td><td><table>
-    <tr><td>linux-headers</td><td>for main kernel (script will auto detect from /usr/lib/modules/)</td></tr>
-    <tr><td>linux-zen-headers</td><td>for zen kernel (script will auto detect from /usr/lib/modules/)</td></tr>
-    <tr><td>linux-lts-headers</td><td>for lts kernel (script will auto detect from /usr/lib/modules/)</td></tr>
-    <tr><td>nvidia-dkms</td><td>nvidia drivers (script will auto detect from lspci -k | grep -A 2 -E "(VGA|3D)")</td></tr>
-    <tr><td>nvidia-utils</td><td>nvidia utils (script will auto detect from lspci -k | grep -A 2 -E "(VGA|3D)")</td></tr></table>
-</td></tr></table>
-
-<table><tr><td>
-<code>u</code><br><code>t</code><br><code>i</code><br><code>l</code><br><code>s</code></td><td><table>
-    <tr><td>pipewire</td><td>audio and video server</td></tr>
-    <tr><td>pipewire-alsa</td><td>for audio</td></tr>
-    <tr><td>pipewire-audio</td><td>for audio</td></tr>
-    <tr><td>pipewire-jack</td><td>for audio</td></tr>
-    <tr><td>pipewire-pulse</td><td>for audio</td></tr>
-    <tr><td>gst-plugin-pipewire</td><td>for audio</td></tr>
-    <tr><td>wireplumber</td><td>audio and video server</td></tr>
-    <tr><td>networkmanager</td><td>network manager</td></tr>
-    <tr><td>network-manager-applet</td><td>nm tray</td></tr>
-    <tr><td>bluez</td><td>for bluetooth</td></tr>
-    <tr><td>bluez-utils</td><td>for bluetooth</td></tr>
-    <tr><td>blueman</td><td>bt tray</td></tr></table>
-</td></tr></table>
-
-<table><tr><td>
-<code>l</code><br><code>o</code><br><code>g</code><br><code>i</code><br><code>n</code></td><td><table>
-    <tr><td>sddm-git</td><td>display manager for login</td></tr>
-    <tr><td>qt5-wayland</td><td>for QT wayland XDP</td></tr>
-    <tr><td>qt6-wayland</td><td>for QT wayland XDP</td></tr>
-    <tr><td>qt5-quickcontrols</td><td>for sddm theme</td></tr>
-    <tr><td>qt5-quickcontrols2</td><td>for sddm theme</td></tr>
-    <tr><td>qt5-graphicaleffects</td><td>for sddm theme</td></tr></table>
-</td></tr></table>
-
-<table><tr><td>
-<code>h</code><br><code>y</code><br><code>p</code><br><code>r</code></td><td><table>
-    <tr><td>hyprland-git</td><td>main window manager (hyprland-nvidia-git if nvidia card is detected)</td></tr>
-    <tr><td>dunst</td><td>graphical notification daemon</td></tr>
-    <tr><td>rofi-lbonn-wayland-git</td><td>app launcher</td></tr>
-    <tr><td>waybar-hyprland-git</td><td>status bar</td></tr>
-    <tr><td>swww</td><td>wallpaper app</td></tr>
-    <tr><td>swaylock-effects-git</td><td>lockscreen</td></tr>
-    <tr><td>wlogout</td><td>logout screen</td></tr>
-    <tr><td>grimblast-git</td><td>screenshot tool</td></tr>
-    <tr><td>slurp</td><td>selects region for screenshot/screenshare</td></tr>
-    <tr><td>swappy</td><td>screenshot editor</td></tr>
-    <tr><td>cliphist</td><td>clipboard manager</td></tr></table>
-</td></tr></table>
-
-<table><tr><td>
-<code>d</code><br><code>e</code><br><code>p</code><br><code>e</code><br><code>n</code><br><code>d</code><br><code>e</code><br><code>n</code><br><code>c</code><br><code>y</code></td><td><table>
-    <tr><td>polkit-kde-agent</td><td>authentication agent</td></tr>
-    <tr><td>xdg-desktop-portal-hyprland</td><td>XDG Desktop Portal</td></tr>
-    <tr><td>pacman-contrib</td><td>for system update check</td></tr>
-    <tr><td>python-pyamdgpuinfo</td><td>for amd gpu info</td></tr>
-    <tr><td>parallel</td><td>for parallel processing</td></tr>
-    <tr><td>jq</td><td>to read json</td></tr>
-    <tr><td>imagemagick</td><td>for image processing</td></tr>
-    <tr><td>qt5-imageformats</td><td>for dolphin image thumbnails</td></tr>
-    <tr><td>ffmpegthumbs</td><td>for dolphin video thumbnails</td></tr>
-    <tr><td>kde-cli-tools</td><td>for dolphin open with option</td></tr>
-    <tr><td>brightnessctl</td><td>brightness control for laptop</td></tr>
-    <tr><td>pavucontrol</td><td>audio settings gui</td></tr>
-    <tr><td>pamixer</td><td>for waybar audio</td></tr></table>
-</td></tr></table>
-
-<table><tr><td>
-<code>t</code><br><code>h</code><br><code>e</code><br><code>m</code><br><code>e</code></td><td><table>
-    <tr><td>nwg-look</td><td>theming GTK apps</td></tr>
-    <tr><td>kvantum</td><td>theming QT apps</td></tr>
-    <tr><td>qt5ct</td><td>theming QT5 apps</td></tr></table>
-</td></tr></table>
-
-<table><tr><td>
-<code>a</code><br><code>p</code><br><code>p</code><br><code>s</code></td><td><table>
-    <tr><td>firefox</td><td>browser</td></tr>
-    <tr><td>kitty</td><td>terminal</td></tr>
-    <tr><td>neofetch</td><td>fetch tool</td></tr>
-    <tr><td>dolphin</td><td>kde file manager</td></tr>
-    <tr><td>visual-studio-code-bin</td><td>gui code editor</td></tr>
-    <tr><td>vim</td><td>text editor</td></tr>
-    <tr><td>ark</td><td>kde file archiver</td></tr></table>
-</td></tr></table>
-
-<table><tr><td>
-    <code>s</code><br><code>h</code><br><code>e</code><br><code>l</code><br><code>l</code></td><td><table>
-    <tr><td>zsh</td><td>main shell</td></tr>
-    <tr><td>eza</td><td>colorful file lister</td></tr>
-    <tr><td>oh-my-zsh-git</td><td>for zsh plugins</td></tr>
-    <tr><td>zsh-theme-powerlevel10k-git</td><td>theme for zsh</td></tr>
-    <tr><td>pokemon-colorscripts-git</td><td>display pokemon sprites</td></tr></table>
-</td></tr></table>
-
-
-<div align = right> <br><br>
-
-[<kbd> <br> 🡅 <br> </kbd>](#-design-by-t2)
-</div>
-
 ## Keybindings
 
 | Keys | Action |
@@ -304,6 +202,7 @@ To create your own custom theme, please refer [theming wiki](https://github.com/
 | <kbd>Super</kbd> + <kbd>Del</kbd> | quit hyprland session
 | <kbd>Super</kbd> + <kbd>W</kbd> | toggle window on focus to float
 | <kbd>Alt</kbd> + <kbd>Enter</kbd> | toggle window on focus to fullscreen
+| <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd> | toggle float-n-pin on focused window
 | <kbd>Super</kbd> + <kbd>J</kbd> | toggle layout
 | <kbd>Super</kbd> + <kbd>G</kbd> | toggle window group
 | <kbd>Super</kbd> + <kbd>T</kbd> | launch kitty terminal
@@ -332,7 +231,7 @@ To create your own custom theme, please refer [theming wiki](https://github.com/
 | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>[0-9]</kbd> | move active window to workspace [0-9]
 | <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>[0-9]</kbd> | move active window to workspace [0-9] (silently)
 | <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>S</kbd> | move window to special workspace
-| <kbd>Super</kbd> + <kbd>S</kbd> | toogle to special workspace
+| <kbd>Super</kbd> + <kbd>S</kbd> | toggle to special workspace
 | <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>G</kbd> | disable hypr effects for gamemode
 | <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>→</kbd> | next wallpaper
 | <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>←</kbd> | previous wallpaper
